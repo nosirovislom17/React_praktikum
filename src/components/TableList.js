@@ -1,26 +1,21 @@
 import React from "react";
-import TableHeader from "./TableHeader";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import TableItem from "./TableItem";
 
 const TableList = ({ posts, title, remove }) => {
+  if (!posts.length) {
+    return <h6 className="text-center">Not Found</h6>;
+  }
   return (
     <>
       <h5 className="text-center">{title}</h5>
-      <table className="table table-striped">
-        <TableHeader />
-        <tbody>
-          {posts.map((data, index) => {
-            return (
-              <TableItem
-                remove={remove}
-                number={index + 1}
-                post={data}
-                key={data.id}
-              />
-            );
-          })}
-        </tbody>
-      </table>
+      <TransitionGroup>
+        {posts.map((post, index) => (
+          <CSSTransition key={post.id} timeout={500} classNames="item">
+            <TableItem remove={remove} number={index + 1} post={post} />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </>
   );
 };

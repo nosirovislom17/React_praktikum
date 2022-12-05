@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import FilterAndSearch from "./components/FilterAndSearch";
 import PostForm from "./components/PostForm";
 import TableList from "./components/TableList";
+import MyButton from "./components/UI/button/MyButton";
+import MyModal from "./components/UI/modal/MyModal";
+import { usePosts } from "./hooks/useCreatePost";
 import "./style/style.css";
 
 function App() {
@@ -11,8 +15,13 @@ function App() {
     { id: 4, title: "Goo", stack: "Back End" },
   ]);
 
+  const [filter, setFilter] = useState({ sort: "", search: "" });
+  const [modal, setModal] = useState(false);
+  const sortedAndSearchPost = usePosts(posts, filter.sort, filter.search);
+
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
+    setModal(false);
   };
 
   const removePost = (post) => {
@@ -21,22 +30,23 @@ function App() {
 
   return (
     <div className="app w-50 mx-auto">
-      <PostForm createPost={createPost} />
-      <div className="d-flex flex-row-reverse my-2">
-        <select className="form-select w-50">
-          <option>Sorted by Title</option>
-          <option>Sorted by Job</option>
-        </select>
-      </div>
-      {posts.length ? (
-        <TableList
-          remove={removePost}
-          posts={posts}
-          title={"Favourite Programming Language"}
-        />
-      ) : (
-        <h6 className="text-center my-3">You should add some post</h6>
-      )}
+      <MyButton
+        onClick={() => {
+          return setModal(true);
+        }}
+        className="btn btn-primary"
+      >
+        Add Posts
+      </MyButton>
+      <MyModal modal={modal} setModal={setModal}>
+        <PostForm createPost={createPost} />
+      </MyModal>
+      <FilterAndSearch filter={filter} setFilter={setFilter} />
+      <TableList
+        remove={removePost}
+        posts={sortedAndSearchPost}
+        title={"Favourite Programming Language"}
+      />
     </div>
   );
 }

@@ -38,7 +38,9 @@ const PostForm = ({ createPost }) => {
           setPost({ ...post, stack: e.target.value });
         }}
       />
-      <MyButton onClick={addPost}>Add Post</MyButton>
+      <MyButton onClick={addPost} className="btn btn-primary w-100">
+        Add Post
+      </MyButton>
     </form>
   );
 };
