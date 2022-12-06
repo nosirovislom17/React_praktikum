@@ -13,9 +13,7 @@ const FilterAndSearch = ({ filter, setFilter }) => {
       />
       <MySelect
         value={filter.sort}
-        onChange={(e) =>
-          setFilter({ ...filter, sort: e.target.value })
-        }
+        onChange={(e) => setFilter({ ...filter, sort: e })}
         defaultValue={"Sorted by"}
         option={[
           { value: "title", name: "Programming" },
