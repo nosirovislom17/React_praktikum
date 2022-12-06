@@ -13,8 +13,8 @@ const FilterAndSearch = ({ filter, setFilter }) => {
       />
       <MySelect
         value={filter.sort}
-        onChange={(selected) =>
-          setFilter({ ...filter, sort: selected.target.value })
+        onChange={(e) =>
+          setFilter({ ...filter, sort: e.target.value })
         }
         defaultValue={"Sorted by"}
         option={[

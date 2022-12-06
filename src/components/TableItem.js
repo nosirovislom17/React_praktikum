@@ -3,10 +3,15 @@ import MyButton from "./UI/button/MyButton";
 
 const TableItem = (props) => {
   return (
-    <div className="d-flex justify-content-between border p-2 m-2">
-      <p>{props.number}</p>
-      <p>{props.post.title}</p>
-      <p>{props.post.stack}</p>
+    <div
+      style={{ display: "grid", gridTemplateColumns: "70% 30%" }}
+      className="border my-2 p-3"
+    >
+      <div>
+        <span>{props.number}</span>
+        <p style={{ display: "inline-block" }}>{props.post.title}</p>
+        <p className="lead">{props.post.body}</p>
+      </div>
       <p>
         <MyButton
           onClick={() => {
@@ -14,7 +19,7 @@ const TableItem = (props) => {
           }}
           className="btn btn-outline-danger w-100"
         >
-          delete
+          Delete
         </MyButton>
       </p>
     </div>
