@@ -16,8 +16,8 @@ const FilterAndSearch = ({ filter, setFilter }) => {
         onChange={(e) => setFilter({ ...filter, sort: e })}
         defaultValue={"Sorted by"}
         option={[
-          { value: "title", name: "Programming" },
-          { value: "stack", name: "Jobs" },
+          { value: "title", name: "Title" },
+          { value: "body", name: "Body" },
         ]}
       />
     </div>

@@ -3,13 +3,11 @@ import MyButton from "./UI/button/MyButton";
 
 const TableItem = (props) => {
   return (
-    <div
-      style={{ display: "grid", gridTemplateColumns: "70% 30%" }}
-      className="border my-2 p-3"
-    >
+    <div className="border my-2 p-3 d-flex justify-content-between align-items-center">
       <div>
-        <span>{props.number}</span>
-        <p style={{ display: "inline-block" }}>{props.post.title}</p>
+        <span>
+          {props.number}.<b> {props.post.title}</b>
+        </span>
         <p className="lead">{props.post.body}</p>
       </div>
       <p>

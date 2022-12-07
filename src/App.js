@@ -1,26 +1,25 @@
-import axios from "axios";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+import PostServiceApi from "./API/PostServiceApi";
 import FilterAndSearch from "./components/FilterAndSearch";
 import PostForm from "./components/PostForm";
 import TableList from "./components/TableList";
 import MyButton from "./components/UI/button/MyButton";
+import MyLoader from "./components/UI/Loader/MyLoader";
 import MyModal from "./components/UI/modal/MyModal";
 import { usePosts } from "./hooks/useCreatePost";
 import "./style/style.css";
 
 function App() {
-  const [posts, setPosts] = useState([
-    { id: 1, title: "JavaScript", body: "MERN Stack" },
-    { id: 2, title: "Python", body: "Full-Stack" },
-    { id: 3, title: "C#", body: "Cyber" },
-    { id: 4, title: "Goo", body: "Back End" },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState({ sort: "", search: "" });
   const [modal, setModal] = useState(false);
   const sortedAndSearchPost = usePosts(posts, filter.sort, filter.search);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -28,10 +27,10 @@ function App() {
   };
 
   async function fetchPosts() {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-    console.log(response);
+    setIsLoading(true);
+    const posts = await PostServiceApi.getAllPosts();
+    setPosts(posts);
+    setIsLoading(false);
   }
 
   const removePost = (post) => {
@@ -39,8 +38,7 @@ function App() {
   };
 
   return (
-    <div className="app w-50 mx-auto">
-      <button onClick={fetchPosts}>Fetch API</button>
+    <div className="app w-75 mx-auto">
       <MyButton
         onClick={() => {
           return setModal(true);
@@ -53,11 +51,18 @@ function App() {
         <PostForm createPost={createPost} />
       </MyModal>
       <FilterAndSearch filter={filter} setFilter={setFilter} />
-      <TableList
-        remove={removePost}
-        posts={sortedAndSearchPost}
-        title={"Favourite Programming Language"}
-      />
+
+      {isLoading ? (
+        <div className="d-flex justify-content-center mt-5">
+          <MyLoader />
+        </div>
+      ) : (
+        <TableList
+          remove={removePost}
+          posts={sortedAndSearchPost}
+          title={"Beautiful posts"}
+        />
+      )}
     </div>
   );
 }
