@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context";
 
 const Navbar = () => {
+  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const logout = () => {
+    setIsAuth(false);
+    localStorage.removeItem("auth");
+  };
   return (
     <div className="container d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <a
@@ -34,7 +40,9 @@ const Navbar = () => {
         <Link className="me-3 py-2 text-dark text-decoration-none" to="/posts">
           Posts
         </Link>
-        <button className="btn btn-primary mx-2 my-1">LogIn</button>
+        <button className="btn btn-primary mx-2 my-1" onClick={logout}>
+          LogOut
+        </button>
       </nav>
     </div>
   );
