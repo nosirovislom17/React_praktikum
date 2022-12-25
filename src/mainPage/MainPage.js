@@ -29,7 +29,6 @@ function MainPage() {
     }
   );
 
-  console.log(totalPage);
 
   useEffect(() => {
     fetchPosts(limit, page);

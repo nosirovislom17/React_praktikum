@@ -1,0 +1,12 @@
+.game {
+  display: flex;
+  background: linear-gradient(
+    135deg,
+    rgba(21, 324, 32, 1) 0%,
+    rgba(147, 55, 95) 50%
+  );
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}

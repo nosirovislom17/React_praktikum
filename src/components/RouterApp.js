@@ -13,6 +13,7 @@ const RouterApp = () => {
             path={route.path}
             element={route.element}
             exact={route.exact}
+            key={route.path}
           />
         );
       })}
@@ -26,6 +27,7 @@ const RouterApp = () => {
             path={route.path}
             element={route.element}
             exact={route.exact}
+            key={route.exact}
           />
         );
       })}
