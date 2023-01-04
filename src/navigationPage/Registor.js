@@ -1,16 +1,7 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import MyInput from "../components/UI/input/MyInput";
-import { AuthContext } from "../context";
-import "./Login.css";
 
-const Login = () => {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
-  const login = (e) => {
-    e.preventDefault();
-    setIsAuth(true);
-    localStorage.setItem("auth", "true");
-  };
+const Registor = () => {
   return (
     <div className="container">
       <div className="row">
@@ -19,10 +10,10 @@ const Login = () => {
           <div className="col-lg-12 login-key">
             <i className="fa fa-key" aria-hidden="true" />
           </div>
-          <div className="col-lg-12 login-title">ADMIN PANEL</div>
+          <div className="col-lg-12 login-title">Registor PANEL</div>
           <div className="col-lg-12 login-form">
             <div className="col-lg-12 login-form">
-              <form onSubmit={login}>
+              <form>
                 <div className="form-group">
                   <MyInput
                     type="text"
@@ -43,9 +34,8 @@ const Login = () => {
                   <div className="col-lg-6 login-btm login-text"></div>
                   <div className="col-lg-6 login-btm login-button">
                     <button type="submit" className="btn btn-outline-primary">
-                      LOGIN
+                      Registor
                     </button>
-                    <Link to="/registor">Registor</Link>
                   </div>
                 </div>
               </form>
@@ -58,4 +48,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Registor;
